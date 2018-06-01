@@ -149,6 +149,8 @@ namespace Merchello.Plugin.Payments.Stripe
                     (current, key) => current + (key + "=" + HttpUtility.UrlEncode(requestParameters[key]) + "&"))
                     .TrimEnd('&');
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+
             var request = (HttpWebRequest) WebRequest.Create(apiUrl);
             request.Method = httpMethod;
             request.ContentLength = postData.Length;
